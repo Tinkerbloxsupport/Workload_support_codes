@@ -1,0 +1,37 @@
+# Use the official Ollama image as the base 
+
+FROM docker.io/ollama/ollama:latest 
+
+ 
+
+# Set the working directory (optional) 
+
+WORKDIR /root/.ollama 
+
+ 
+
+# Use a shell script to start the server, pull the model, and then kill the server 
+
+# This ensures the model files are saved into the image layer 
+
+RUN ollama serve & \ 
+
+sleep 5 && \ 
+
+ollama pull qwen3&& \ 
+
+pkill ollama 
+
+ 
+
+ 
+
+# Expose the default port 
+
+EXPOSE 11434 
+
+ 
+
+# Set the entrypoint to start the server 
+
+ENTRYPOINT ["ollama", "serve"] 
