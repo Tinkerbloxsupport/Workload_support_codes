@@ -1,0 +1,5 @@
+# Build image
+docker build -t safe-agent .
+
+# Run container
+docker run -d -p 8080:11434 safe-agent
