@@ -1,5 +1,39 @@
-# Build image
-docker build -t safe-agent .
+# Use the official Ollama image as the base 
 
-# Run container
-docker run -d -p 8080:11434 safe-agent
+FROM docker.io/ollama/ollama:latest 
+
+ 
+
+# Set the working directory (optional) 
+
+WORKDIR /root/.ollama 
+
+ 
+
+# Use a shell script to start the server, pull the model, and then kill the server 
+
+# This ensures the model files are saved into the image layer 
+
+RUN ollama serve & \ 
+
+sleep 5 && \ 
+
+ollama pull llama3 && \ 
+
+pkill ollama 
+
+ 
+
+RUN ollama serve & \ 
+
+sleep 5 && \ 
+
+ollama pull gpt-oss-safeguard && \ 
+
+pkill ollama 
+
+ 
+
+# Set the entrypoint to start the server 
+
+ENTRYPOINT ["ollama", "serve"] 
