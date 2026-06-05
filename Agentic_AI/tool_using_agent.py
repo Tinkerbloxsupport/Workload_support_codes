@@ -28,7 +28,7 @@ def print_metrics(response, step_name):
 
 
 def main():
-    user_query = "Write a article about weather in Boston in 1000 lines"
+    user_query = "Write an article about weather in Boston about 50 lines"
 
     response = model_with_tools.invoke(user_query)
     print_metrics(response, "Initial Tool-Call")
