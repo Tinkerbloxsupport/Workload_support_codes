@@ -18,10 +18,20 @@ model = ChatOllama(
 model_with_tools = model.bind_tools([get_weather])
 
 
+def print_metrics(response, step_name):
+    """Extracts and prints eval metrics from the response metadata."""
+    metadata = response.response_metadata
+    eval_count = metadata.get("eval_count", "N/A")
+    eval_duration_ns = metadata.get("eval_duration")
+    eval_duration_s = f"{eval_duration_ns / 1e9:.4f}s" if eval_duration_ns else "N/A"
+    print(f"[{step_name}] Tokens: {eval_count} | Duration: {eval_duration_s}")
+
+
 def main():
-    user_query = "What's the weather like in Boston?"
+    user_query = "Write a article about weather in Boston in 1000 lines"
 
     response = model_with_tools.invoke(user_query)
+    print_metrics(response, "Initial Tool-Call")
 
     # Step 1: Print tool calls (if any)
     if response.tool_calls:
@@ -49,6 +59,7 @@ def main():
                         tool_call_id=tool_call["id"]
                     )
                 ])
+                print_metrics(final_response, "Final Answer")
 
                 print("\nFinal Answer:")
                 print(final_response.content)
