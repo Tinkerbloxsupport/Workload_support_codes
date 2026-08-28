@@ -1,0 +1,198 @@
+{
+  "threat_keywords": {
+    "high": [
+      "tunnel",
+      "shank",
+      "weapon",
+      "knife",
+      "kill",
+      "attack",
+      "breakout",
+      "escape plan",
+      "getaway"
+    ],
+    "medium": [
+      "escape",
+      "run",
+      "flee",
+      "digging",
+      "dig",
+      "unlock",
+      "gate",
+      "fence",
+      "break out",
+      "riot"
+    ],
+    "low": [
+      "plan",
+      "tonight",
+      "tomorrow",
+      "signal",
+      "outside",
+      "freedom",
+      "wall"
+    ]
+  },
+  "profanity_keywords": {
+    "high": [],
+    "medium": [
+      "fuck",
+      "shit"
+    ],
+    "low": [
+      "damn",
+      "bastard",
+      "bitch",
+      "asshole",
+      "crap",
+      "dick",
+      "piss",
+      "hell"
+    ]
+  },
+  "contextual_innocence": {
+    "outside": [
+      "tea",
+      "morning",
+      "walk",
+      "day",
+      "spend",
+      "air",
+      "nature",
+      "fresh",
+      "sit",
+      "cup",
+      "sitting"
+    ],
+    "plan": [
+      "weekend",
+      "schedule",
+      "dinner",
+      "meeting",
+      "trip",
+      "work",
+      "project",
+      "vacation",
+      "party",
+      "event"
+    ],
+    "guard": [
+      "security",
+      "watch",
+      "protect",
+      "duty",
+      "shift",
+      "stand",
+      "patrol",
+      "office"
+    ],
+    "tomorrow": [
+      "meeting",
+      "work",
+      "appointment",
+      "call",
+      "visit",
+      "day",
+      "weather",
+      "schedule",
+      "lunch",
+      "breakfast",
+      "morning"
+    ],
+    "gate": [
+      "open",
+      "lock",
+      "security",
+      "entrance",
+      "exit",
+      "check",
+      "pass",
+      "visitor"
+    ],
+    "run": [
+      "exercise",
+      "jog",
+      "errand",
+      "coffee",
+      "shower",
+      "late",
+      "quick",
+      "fast",
+      "sprint",
+      "morning"
+    ],
+    "wall": [
+      "paint",
+      "repair",
+      "picture",
+      "hang",
+      "decor",
+      "decoration",
+      "poster",
+      "art",
+      "mark"
+    ],
+    "fence": [
+      "repair",
+      "paint",
+      "yard",
+      "wood",
+      "gate",
+      "property",
+      "neighbor"
+    ],
+    "key": [
+      "lock",
+      "door",
+      "car",
+      "house",
+      "opening",
+      "access",
+      "important",
+      "keyboard",
+      "music"
+    ],
+    "keys": [
+      "lock",
+      "door",
+      "car",
+      "house",
+      "opening",
+      "access",
+      "keyboard",
+      "music",
+      "jingling"
+    ],
+    "signal": [
+      "text",
+      "message",
+      "call",
+      "phone",
+      "wifi",
+      "radio",
+      "network",
+      "communication",
+      "contact"
+    ]
+  },
+  "phrase_patterns": [
+    "escape tonight",
+    "escape tomorrow",
+    "break out",
+    "digging tunnel",
+    "tunnel behind",
+    "need to escape",
+    "running away",
+    "get out tonight",
+    "get out tomorrow",
+    "steal weapon",
+    "steal knife",
+    "make shank"
+  ],
+  "notes": {
+    "description": "Threat and profanity detection configuration with context-aware filtering",
+    "severity_levels": "high=most concerning, medium=moderate, low=low risk or common false positive",
+    "contextual_innocence": "Words that appear frequently in innocent contexts. If these words appear near context keywords, detection is filtered.",
+    "usage": "Load with: python cli_improved.py --keywords-file keywords.json sweep data/cells --json-out results/output.json"
+  }
+}
