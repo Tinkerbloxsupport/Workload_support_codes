@@ -1,0 +1,20 @@
+FROM ghcr.io/idiap/coqui-tts:latest
+
+# torch + its CUDA deps are 2-3GB total; uv's default 30s per-operation timeout
+# is too short for the larger files (nvidia-cusparse-cu12, nvidia-cudnn-cu12, etc.)
+ENV UV_HTTP_TIMEOUT=300
+
+# Install the CUDA-enabled torch build into the image's existing venv (uv, not pip, is what's available here)
+RUN uv pip install --python /opt/venv/bin/python3 torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+
+ENV TTS_MODEL="tts_models/en/ljspeech/tacotron2-DDC"
+ENV TTS_PORT=5002
+
+EXPOSE 5002
+
+# tts-server loads the model once at startup and keeps it in memory,
+# serving synthesis requests over HTTP until the container is stopped.
+ENTRYPOINT ["/opt/venv/bin/tts-server"]
+CMD ["--model_name", "tts_models/en/ljspeech/tacotron2-DDC", "--port", "5002", "--use_cuda", "true"]
+
+
